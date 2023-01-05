@@ -4,7 +4,6 @@ import {useState} from 'react';
 import Initial from './Tabs/Initial';
 import Categories from './Tabs/Categories';
 import CustomTabBar from '../../components/CustomTabBar';
-import styles from './styles';
 
 const renderScene = SceneMap({
   first: Initial,
@@ -21,20 +20,13 @@ const Main = () => {
   ]);
 
   return (
-    <>
-      <TabView
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={{width: layout.width}}
-        renderTabBar={props => (
-          <CustomTabBar props={props} setIndex={setIndex} />
-        )}
-      />
-      <TouchableOpacity style={styles.containerButtonAdd}>
-        <Text style={styles.containerButtonAddText}>+</Text>
-      </TouchableOpacity>
-    </>
+    <TabView
+      navigationState={{index, routes}}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{width: layout.width}}
+      renderTabBar={props => <CustomTabBar props={props} setIndex={setIndex} />}
+    />
   );
 };
 
