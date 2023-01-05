@@ -1,6 +1,7 @@
 import {NavigationState, SceneRendererProps} from 'react-native-tab-view';
 import React from 'react';
 import {Animated, TouchableOpacity, View} from 'react-native';
+import styles from './styles';
 
 interface ICustomTabBar {
   props: SceneRendererProps & {
@@ -16,7 +17,7 @@ const CustomTabBar = ({props, setIndex}: ICustomTabBar) => {
   const inputRange = props.navigationState.routes.map((x, i) => i);
 
   return (
-    <View style={{backgroundColor: '#000'}}>
+    <View style={styles.container}>
       {props.navigationState.routes.map((route, i) => {
         const opacity = props.position.interpolate({
           inputRange,
@@ -26,11 +27,13 @@ const CustomTabBar = ({props, setIndex}: ICustomTabBar) => {
         });
 
         return (
-          <TouchableOpacity key={route.key} onPress={() => setIndex(i)}>
-            <Animated.Text style={{opacity, color: '#fff'}}>
-              {route.title}
-            </Animated.Text>
-          </TouchableOpacity>
+          <View key={route.key} style={styles.containerButton}>
+            <TouchableOpacity onPress={() => setIndex(i)}>
+              <Animated.Text style={[styles.textButton, {opacity}]}>
+                {route.title}
+              </Animated.Text>
+            </TouchableOpacity>
+          </View>
         );
       })}
     </View>
