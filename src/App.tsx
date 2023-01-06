@@ -23,7 +23,10 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor="#CC0000"
+      />
       <NavigationContainer ref={navigationRef}>
         <StackNavigation />
       </NavigationContainer>
