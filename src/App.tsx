@@ -8,22 +8,27 @@
  * @format
  */
 
-import React from 'react';
+import React, {useRef} from 'react';
 import {StatusBar, Text, TouchableOpacity, useColorScheme} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 import StackNavigation from './routes/stack';
 import styles from './styles';
 const App = () => {
   const isDarkMode = useColorScheme() !== 'dark';
-
+  const navigationRef = useRef<NavigationContainerRef<any>>(null);
   return (
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <StackNavigation />
       </NavigationContainer>
 
-      <TouchableOpacity style={styles.containerButtonAdd}>
+      <TouchableOpacity
+        style={styles.containerButtonAdd}
+        onPress={() => navigationRef.current?.navigate('Cadastrar Anime')}>
         <Text style={styles.containerButtonAddText}>+</Text>
       </TouchableOpacity>
     </>

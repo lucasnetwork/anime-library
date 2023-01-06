@@ -1,4 +1,4 @@
-import {Text, TouchableOpacity, useWindowDimensions, View} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import {useState} from 'react';
 import Initial from './Tabs/Initial';
