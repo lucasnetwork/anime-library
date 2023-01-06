@@ -16,9 +16,11 @@ import {
 } from '@react-navigation/native';
 import StackNavigation from './routes/stack';
 import styles from './styles';
+
 const App = () => {
   const isDarkMode = useColorScheme() !== 'dark';
   const navigationRef = useRef<NavigationContainerRef<any>>(null);
+
   return (
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
