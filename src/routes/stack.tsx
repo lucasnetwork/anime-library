@@ -4,6 +4,7 @@ import React from 'react';
 import AddAnime from '../screens/Main/AddAnime';
 import Icon from 'react-native-vector-icons/Feather';
 import {TouchableOpacity} from 'react-native';
+import Anime from '../screens/Main/Anime';
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => (
@@ -25,6 +26,11 @@ const StackNavigation = () => (
       },
     })}>
     <Stack.Screen name="Biblioteca" component={Main} />
+    <Stack.Screen
+      name="Anime"
+      options={{headerShown: false}}
+      component={Anime}
+    />
     <Stack.Screen name="Cadastrar Anime" component={AddAnime} />
   </Stack.Navigator>
 );
