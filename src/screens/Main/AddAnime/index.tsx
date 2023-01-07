@@ -40,11 +40,17 @@ const AddAnime = () => {
       </TouchableOpacity>
       <TextInput style={styles.input} placeholder="Nome do anime" />
       <View style={styles.row}>
-        <TextInput placeholder="Nota" style={styles.input} />
-
         <TextInput
-          style={[styles.input, {marginHorizontal: 16}]}
-          placeholder="N Episódios"
+          placeholder="Nota"
+          style={[styles.input, {marginRight: 16}]}
+        />
+
+        <TextInput style={styles.input} placeholder="N Episódios" />
+      </View>
+      <View style={styles.row}>
+        <TextInput
+          placeholder="Categoria"
+          style={[styles.input, {marginRight: 16}]}
         />
         <TextInput style={styles.input} placeholder="Data" />
       </View>
