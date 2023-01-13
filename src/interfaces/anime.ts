@@ -3,7 +3,7 @@ export interface IAnime {
   name: string;
   episodeNumbers: string;
   category: string;
-  review: number;
+  review: string;
   date: string;
   resume: string;
 }
