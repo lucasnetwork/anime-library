@@ -9,6 +9,7 @@ export default StyleSheet.create({
   imageContainer: {
     position: 'relative',
     flex: 1,
+    width: '100%',
   },
 
   containerContent: {
