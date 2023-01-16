@@ -13,7 +13,11 @@ import React from 'react';
 import {useFormik} from 'formik';
 import newAnime from '../../../services/api/newAnime';
 
+import {Picker} from '@react-native-picker/picker';
+import {useNavigation} from '@react-navigation/native';
+
 const AddAnime = () => {
+  const navigate = useNavigation();
   const formik = useFormik({
     initialValues: {
       url: '',
@@ -27,7 +31,11 @@ const AddAnime = () => {
     async onSubmit(values) {
       try {
         await newAnime(values);
-      } catch {}
+
+        navigate.goBack();
+      } catch (e) {
+        Alert.alert(JSON.stringify(e));
+      }
     },
   });
 
@@ -39,6 +47,8 @@ const AddAnime = () => {
           try {
             const result = await launchImageLibrary({
               mediaType: 'photo',
+              maxHeight: 200,
+              maxWidth: 200,
             });
 
             if (!result.assets) {
@@ -59,6 +69,7 @@ const AddAnime = () => {
         style={styles.input}
         value={formik.values.name}
         placeholder="Nome do anime"
+        onChangeText={e => formik.setFieldValue('name', e)}
       />
       <View style={styles.row}>
         <TextInput
@@ -66,20 +77,41 @@ const AddAnime = () => {
           keyboardType="decimal-pad"
           value={formik.values.review}
           style={[styles.input, {marginRight: 16}]}
+          onChangeText={e => formik.setFieldValue('review', e)}
         />
 
-        <TextInput style={styles.input} placeholder="N Episódios" />
+        <TextInput
+          style={styles.input}
+          value={formik.values.episodeNumbers}
+          placeholder="N Episódios"
+          onChangeText={e => formik.setFieldValue('episodeNumbers', e)}
+        />
       </View>
       <View style={styles.row}>
-        <TextInput
-          value={formik.values.category}
-          placeholder="Categoria"
-          style={[styles.input, {marginRight: 16}]}
-        />
+        <View style={[styles.row, {flex: 1}]}>
+          <TextInput
+            value={formik.values.category}
+            placeholder="Categoria"
+            style={[styles.input, {marginRight: 16}]}
+            onChangeText={e => formik.setFieldValue('category', e)}
+          />
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Picker
+              style={{width: 20}}
+              selectedValue={formik.values.category}
+              onValueChange={itemValue =>
+                formik.setFieldValue('category', itemValue)
+              }>
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+          </View>
+        </View>
         <TextInput
           value={formik.values.date}
           style={styles.input}
           placeholder="Data"
+          onChangeText={e => formik.setFieldValue('date', e)}
         />
       </View>
       <TextInput
@@ -87,8 +119,9 @@ const AddAnime = () => {
         textAlignVertical="top"
         multiline
         style={styles.textarea}
+        onChangeText={e => formik.setFieldValue('resume', e)}
       />
-      <TouchableOpacity style={styles.buttonSave}>
+      <TouchableOpacity style={styles.buttonSave} onPress={formik.handleSubmit}>
         <Text style={styles.buttonSaveText}>Salvar</Text>
       </TouchableOpacity>
     </ScrollView>

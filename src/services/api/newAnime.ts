@@ -2,9 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IAnime, IAnimeWithId} from '../../interfaces/anime';
 import uuid from 'react-native-uuid';
 export default async (anime: IAnime) => {
-  const getAnimes: IAnimeWithId[] = JSON.parse(
-    (await AsyncStorage.getItem('animes')) || '',
-  );
+  let getAnimes: IAnimeWithId[] = [];
+  try {
+    getAnimes = JSON.parse((await AsyncStorage.getItem('animes')) || '');
+  } catch {}
   const animeWithId = {
     ...anime,
     id: uuid.v4().toString(),
