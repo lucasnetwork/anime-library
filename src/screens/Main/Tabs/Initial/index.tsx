@@ -2,6 +2,7 @@ import {FlatList, View} from 'react-native';
 import Item from './components/Item';
 import styles from './styles';
 import {useContextProvider} from '../../../../services/context';
+import {useState} from 'react';
 
 const Initial = () => {
   const {animes} = useContextProvider();
@@ -12,7 +13,9 @@ const Initial = () => {
         data={animes}
         numColumns={3}
         keyExtractor={item => `${item.id}`}
-        renderItem={item => <Item uri={item.item.url} id={item.item.id} />}
+        renderItem={item => (
+          <Item uri={item.item.url} id={item.item.id} openModal={id => {}} />
+        )}
       />
     </View>
   );

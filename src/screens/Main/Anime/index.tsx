@@ -82,24 +82,27 @@ const Anime = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Animated.View style={[animatedStyles]}>
-        <Image
-          source={{
-            uri: anime?.url,
-          }}
-          style={styles.imageContainer}
-          resizeMode="cover"
-        />
-        <TouchableOpacity
-          style={styles.buttonGoBack}
-          onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" color="#fff" size={32} />
-        </TouchableOpacity>
         <GestureDetector gesture={gesture}>
-          <Text style={styles.textImage}>{anime?.name}</Text>
+          <View style={{flex: 1}}>
+            <Image
+              source={{
+                uri: anime?.url,
+              }}
+              style={styles.imageContainer}
+              resizeMode="cover"
+            />
+
+            <TouchableOpacity
+              style={styles.buttonGoBack}
+              onPress={() => navigation.goBack()}>
+              <Icon name="arrow-left" color="#fff" size={32} />
+            </TouchableOpacity>
+            <Text style={styles.textImage}>{anime?.name}</Text>
+            <View style={styles.containerGradient}>
+              <LinearGradient angle={90} colorList={colorList} />
+            </View>
+          </View>
         </GestureDetector>
-        <View style={styles.containerGradient}>
-          <LinearGradient angle={90} colorList={colorList} />
-        </View>
       </Animated.View>
       <ScrollView>
         <View style={styles.container}>
