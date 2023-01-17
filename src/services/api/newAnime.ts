@@ -12,4 +12,5 @@ export default async (anime: IAnime) => {
   };
   getAnimes.push(animeWithId);
   await AsyncStorage.setItem('animes', JSON.stringify(getAnimes));
+  return animeWithId;
 };
