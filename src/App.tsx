@@ -16,13 +16,14 @@ import {
 } from '@react-navigation/native';
 import StackNavigation from './routes/stack';
 import styles from './styles';
+import ContextProvider from './services/context';
 
 const App = () => {
   const isDarkMode = useColorScheme() !== 'dark';
   const navigationRef = useRef<NavigationContainerRef<any>>(null);
 
   return (
-    <>
+    <ContextProvider>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor="#CC0000"
@@ -36,7 +37,7 @@ const App = () => {
         onPress={() => navigationRef.current?.navigate('Cadastrar Anime')}>
         <Text style={styles.containerButtonAddText}>+</Text>
       </TouchableOpacity>
-    </>
+    </ContextProvider>
   );
 };
 
