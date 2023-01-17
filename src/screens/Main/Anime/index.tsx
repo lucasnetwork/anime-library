@@ -7,11 +7,11 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {LinearGradient} from 'react-native-gradients';
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {
   Gesture,
   GestureDetector,
@@ -21,6 +21,8 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import {IAnimeWithId} from '../../../interfaces/anime';
+import {useContextProvider} from '../../../services/context';
 const colorList = [
   {offset: '0%', color: '#000', opacity: '0.8'},
   {offset: '20%', color: '#000', opacity: '0.5'},
@@ -28,7 +30,18 @@ const colorList = [
 ];
 
 const Anime = () => {
+  const [anime, setAnime] = useState<IAnimeWithId>();
   const navigation = useNavigation();
+  const {animes} = useContextProvider();
+  const params = useRoute<{params: {id: string}}>();
+
+  useEffect(() => {
+    console.log(params);
+    const currentAnime = animes.find(
+      animeValue => animeValue.id === params.params.id,
+    );
+    setAnime(currentAnime);
+  }, [animes, params]);
 
   const isPressed = useSharedValue(false);
 
@@ -71,7 +84,7 @@ const Anime = () => {
       <Animated.View style={[animatedStyles]}>
         <Image
           source={{
-            uri: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp6284892.jpg&f=1&nofb=1&ipt=cdac24823554c8764d223e7b4d170e31b9b0a8d7ce5d1e45be3ddff8939bce55&ipo=images',
+            uri: anime?.url,
           }}
           style={styles.imageContainer}
           resizeMode="cover"
@@ -82,9 +95,7 @@ const Anime = () => {
           <Icon name="arrow-left" color="#fff" size={32} />
         </TouchableOpacity>
         <GestureDetector gesture={gesture}>
-          <Text style={styles.textImage}>
-            Violet Evergarden Gaiden: Eien to Jidou Shuki Ningyou
-          </Text>
+          <Text style={styles.textImage}>{anime?.name}</Text>
         </GestureDetector>
         <View style={styles.containerGradient}>
           <LinearGradient angle={90} colorList={colorList} />
@@ -94,20 +105,17 @@ const Anime = () => {
         <View style={styles.container}>
           <View style={styles.containerContent}>
             <Text style={styles.title}>Sinopse</Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. ver mais
-            </Text>
+            <Text>{anime?.resume}</Text>
             <View style={[styles.row, styles.containerInfos]}>
               <View style={[styles.row, styles.infoContainer]}>
                 <MaterialIcons name="layers-outline" size={24} color="#000" />
-                <Text style={styles.textInfo}>24 episódios</Text>
+                <Text style={styles.textInfo}>
+                  {anime?.episodeNumbers} episódios
+                </Text>
               </View>
               <View style={[styles.row, styles.infoContainer]}>
                 <Icon name="star" color="#000" size={24} />
-                <Text style={styles.textInfo}>4.8/5</Text>
+                <Text style={styles.textInfo}>{anime?.review}/5</Text>
               </View>
             </View>
           </View>

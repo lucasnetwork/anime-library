@@ -11,12 +11,13 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import styles from './styles';
 import React from 'react';
 import {useFormik} from 'formik';
-import newAnime from '../../../services/api/newAnime';
 
 import {Picker} from '@react-native-picker/picker';
 import {useNavigation} from '@react-navigation/native';
+import {useContextProvider} from '../../../services/context';
 
 const AddAnime = () => {
+  const {addAnime, categories} = useContextProvider();
   const navigate = useNavigation();
   const formik = useFormik({
     initialValues: {
@@ -30,8 +31,7 @@ const AddAnime = () => {
     },
     async onSubmit(values) {
       try {
-        await newAnime(values);
-
+        await addAnime(values);
         navigate.goBack();
       } catch (e) {
         Alert.alert(JSON.stringify(e));
@@ -102,8 +102,9 @@ const AddAnime = () => {
               onValueChange={itemValue =>
                 formik.setFieldValue('category', itemValue)
               }>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              {categories.map(category => (
+                <Picker.Item label={category.label} value={category.value} />
+              ))}
             </Picker>
           </View>
         </View>
