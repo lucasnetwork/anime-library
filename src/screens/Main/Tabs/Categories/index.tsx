@@ -18,26 +18,15 @@ const Categories = () => {
         onRequestClose={() => {
           setModal('');
         }}>
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-          }}>
-          <View style={{backgroundColor: '#fff', width: 200, padding: 32}}>
+        <View style={styles.containerModal}>
+          <View style={styles.containerContentModal}>
             <Pressable
               onPress={async () => {
                 await deleteCategory(modal);
                 setModal('');
               }}
-              style={{
-                backgroundColor: '#CC0000',
-                paddingHorizontal: 16,
-                paddingVertical: 8,
-                borderRadius: 5,
-              }}>
-              <Text style={{color: '#fff'}}>Deletar Categoria</Text>
+              style={styles.buttonModal}>
+              <Text style={styles.textModal}>Deletar Categoria</Text>
             </Pressable>
           </View>
         </View>
