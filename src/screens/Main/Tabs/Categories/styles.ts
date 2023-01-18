@@ -5,11 +5,4 @@ export default StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  containerCategory: {
-    height: 40,
-    paddingLeft: 16,
-    justifyContent: 'center',
-    borderBottomColor: '#CC0000',
-    borderBottomWidth: 1,
-  },
 });
