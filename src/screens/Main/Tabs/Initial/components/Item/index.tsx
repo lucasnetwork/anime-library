@@ -1,15 +1,20 @@
 import {useNavigation} from '@react-navigation/native';
-import {Image, TouchableOpacity} from 'react-native';
+import {GestureResponderEvent, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
+import React from 'react';
 
-const Item = ({uri, id, openModal}) => {
+interface IItem {
+  uri: string;
+  id: string;
+  onLongPress: (event: GestureResponderEvent) => void;
+}
+
+const Item = ({uri, id, onLongPress}: IItem) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      onLongPress={() => {
-        openModal(id);
-      }}
+      onLongPress={onLongPress}
       onPress={() => navigation.navigate('Anime', {id})}>
       <Image style={styles.container} source={{uri}} />
     </TouchableOpacity>
