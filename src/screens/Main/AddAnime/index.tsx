@@ -9,16 +9,16 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import styles from './styles';
-import React from 'react';
+import React, {useRef} from 'react';
 import {useFormik} from 'formik';
 
-import {Picker} from '@react-native-picker/picker';
 import {useNavigation} from '@react-navigation/native';
 import {useContextProvider} from '../../../services/context';
 
 const AddAnime = () => {
   const {addAnime, categories} = useContextProvider();
   const navigate = useNavigation();
+  const pickerRef = useRef(null);
   const formik = useFormik({
     initialValues: {
       url: '',
@@ -47,8 +47,6 @@ const AddAnime = () => {
           try {
             const result = await launchImageLibrary({
               mediaType: 'photo',
-              maxHeight: 200,
-              maxWidth: 200,
             });
 
             if (!result.assets) {
@@ -95,18 +93,6 @@ const AddAnime = () => {
             style={[styles.input, {marginRight: 16}]}
             onChangeText={e => formik.setFieldValue('category', e)}
           />
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Picker
-              style={{width: 20}}
-              selectedValue={formik.values.category}
-              onValueChange={itemValue =>
-                formik.setFieldValue('category', itemValue)
-              }>
-              {categories.map(category => (
-                <Picker.Item label={category.label} value={category.value} />
-              ))}
-            </Picker>
-          </View>
         </View>
         <TextInput
           value={formik.values.date}

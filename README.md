@@ -10,5 +10,4 @@ Projeto feito em React native puro de Uma Biblioteca de animes. Cadastro e remo√
 - react-native-image-picker
 - react-native-pager-view
 - react-navigation
-- react-native-picker
 - react-native-async-storage

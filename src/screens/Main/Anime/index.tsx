@@ -107,18 +107,20 @@ const Anime = () => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.containerContent}>
-            <Text style={styles.title}>Sinopse</Text>
-            <Text>{anime?.resume}</Text>
+            <Text style={[styles.title, styles.color]}>Sinopse</Text>
+            <Text style={styles.color}>{anime?.resume}</Text>
             <View style={[styles.row, styles.containerInfos]}>
               <View style={[styles.row, styles.infoContainer]}>
                 <MaterialIcons name="layers-outline" size={24} color="#000" />
-                <Text style={styles.textInfo}>
+                <Text style={[styles.textInfo, styles.color]}>
                   {anime?.episodeNumbers} episódios
                 </Text>
               </View>
               <View style={[styles.row, styles.infoContainer]}>
                 <Icon name="star" color="#000" size={24} />
-                <Text style={styles.textInfo}>{anime?.review}/5</Text>
+                <Text style={[styles.textInfo, styles.color]}>
+                  {anime?.review}/5
+                </Text>
               </View>
             </View>
           </View>

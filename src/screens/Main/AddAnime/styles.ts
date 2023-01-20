@@ -25,6 +25,7 @@ export default StyleSheet.create({
     paddingLeft: 8,
     flex: 1,
     fontSize: 16,
+    color: '#050505',
   },
   row: {
     flexDirection: 'row',

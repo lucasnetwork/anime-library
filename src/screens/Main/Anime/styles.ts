@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     height: Dimensions.get('window').height - 200,
+    backgroundColor: '#fff',
   },
 
   imageContainer: {
@@ -40,6 +41,9 @@ export default StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 8,
+  },
+  color: {
+    color: '#050505',
   },
   containerInfos: {
     marginTop: 16,
